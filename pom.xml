@@ -11,8 +11,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
         <configuration>
-          <source/>
-          <target/>
+          <source> 1.8 </source>
+          <target> 1.8 </target>
         </configuration>
       </plugin>
     </plugins>
@@ -35,5 +35,19 @@
         <artifactId>spring-core</artifactId>
         <version>4.1.4.RELEASE</version>
     </dependency>
+    
+    <!-- Lucene -->
+	<dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-core</artifactId>
+	    <version>3.6.1</version>
+	</dependency>
+    
+	<dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-spellchecker</artifactId>
+	    <version>3.6.1</version>
+	</dependency>
+    
   </dependencies>
 </project>

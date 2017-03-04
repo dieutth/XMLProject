@@ -2,28 +2,36 @@ package server.model;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "book")
+//@XmlRootElement(name = "book")
 public class Book implements Serializable  {
 //	@XmlAttribute
 	@XmlElement
 	private String title;
 	
 //	@XmlElement
-//	private String isbn;
-//	
+	private String description;
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	//	
 //	@XmlElement
 //	private int publishYear;
 //	
 	@XmlElement
 	private String reviews;
 	
+	
 	//constructor
 	public Book (String title, String reviews){
 		setTitle(title);
+		setReviews(reviews);
 	}
 	public Book(){}
 //	public String getReviews() {
