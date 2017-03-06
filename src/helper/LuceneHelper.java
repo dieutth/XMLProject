@@ -20,8 +20,6 @@ public class LuceneHelper {
 	public LuceneHelper(){
 		File dir = new File(spellCheckerFileLocation);
 	     
-//	    Directory directory = FSDirectory.open(dir);
-		 
 		try {
 			Directory directory = FSDirectory.open(dir);
 			spellChecker  = new SpellChecker(directory);

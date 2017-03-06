@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 public class Book implements Serializable  {
 	private static final long serialVersionUID = -8809324453272440314L;
@@ -26,7 +27,8 @@ public class Book implements Serializable  {
 	
 	private List<Review> reviews;
 	
-	@XmlElement
+	@XmlElementWrapper
+	@XmlElement(name="review")
 	public List<Review> getReviews() {
 		return reviews;
 	}

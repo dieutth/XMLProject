@@ -58,12 +58,12 @@ public class BookService {
 	
 	private void getReviews(Book b){
 		String title = b.getTitle();
-		bookImpl.getReviews(title);
-		List<Review> ls = new ArrayList<Review>();
-		Review r = new Review();
-		r.setContent("test review");
-		r.setTime(new Date(2017, 5, 3));
-		ls.add(r);
+		List<Review> ls = bookImpl.getReviews(title);
+//		List<Review> ls = new ArrayList<Review>();
+//		Review r = new Review();
+//		r.setContent("test review");
+//		r.setTime(new Date(2017, 5, 3));
+//		ls.add(r);
 		b.setReviews(ls);
 	}
 	
@@ -71,7 +71,7 @@ public class BookService {
 		List<String> titleList = getBookTitlesFromSearchTitle(searchTitle);
 		BookReviewResponse brr = new BookReviewResponse();
 		List<Book> bookList = new ArrayList<Book>();
-		brr.setLs(bookList);
+		brr.setBooks(bookList);
 		
 		for (String title : titleList){
 			System.out.println(title);
@@ -88,10 +88,17 @@ public class BookService {
 	public void addReview(String title, String review){
 		bookImpl.insertReview(title, review);
 	}
-	
+	public void updateReview(String title, int reviewID, String review){
+		bookImpl.updateReview(title, reviewID, review);
+	}
 	private List<String> getBookTitlesFromSearchTitle(String searchTitle){
 		List<String> result = lucene.getSuggestion(searchTitle);
 		return result;
 	}
+	
+	public void deleteReview(String title, int reviewID){
+		bookImpl.deleteReview(title, reviewID);
+	}
+	
 	
 }
