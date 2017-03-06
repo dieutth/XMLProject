@@ -48,6 +48,13 @@
 	    <artifactId>lucene-spellchecker</artifactId>
 	    <version>3.6.1</version>
 	</dependency>
-    
+   
+   <!-- couchbase client -->
+    <dependency>
+	    <groupId>com.couchbase.client</groupId>
+	    <artifactId>java-client</artifactId>
+	    <version>2.3.6</version>
+  	</dependency>
+  
   </dependencies>
 </project>

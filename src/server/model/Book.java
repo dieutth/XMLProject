@@ -1,14 +1,13 @@
 package server.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-//@XmlRootElement(name = "book")
 public class Book implements Serializable  {
-//	@XmlAttribute
-	@XmlElement
+	private static final long serialVersionUID = -8809324453272440314L;
+
 	private String title;
 	
 //	@XmlElement
@@ -20,45 +19,34 @@ public class Book implements Serializable  {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	//	
-//	@XmlElement
-//	private int publishYear;
-//	
+	
 	@XmlElement
-	private String reviews;
+	private String goodreadReviews;
 	
 	
-	//constructor
-	public Book (String title, String reviews){
-		setTitle(title);
-		setReviews(reviews);
+	private List<Review> reviews;
+	
+	@XmlElement
+	public List<Review> getReviews() {
+		return reviews;
 	}
-	public Book(){}
-//	public String getReviews() {
-//		return reviews;
-//	}
-	public void setReviews(String reviews) {
+	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-//	
-//	public String getTitle() {
-//		return title;
-//	}
+	
+	
+	public void setGoodReadReviews(String reviews) {
+		this.goodreadReviews = reviews;
+	}
+	
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
-//	public String getIsbn() {
-//		return isbn;
-//	}
-//	public void setIsbn(String isbn) {
-//		this.isbn = isbn;
-//	}
-//	public int getPublishYear() {
-//		return publishYear;
-//	}
-//	public void setPublishYear(int publishYear) {
-//		this.publishYear = publishYear;
-//	}
 	
+	@XmlElement
+	public String getTitle(){
+		return title;
+	}
 	
 }

@@ -2,6 +2,7 @@ package server.service;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,15 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import helper.LuceneHelper;
+import server.dao.BookDAOImpl;
 import server.model.Book;
+import server.model.Review;
 import server.response.BookReviewResponse;
 
 public class BookService {
 	private LuceneHelper lucene = new LuceneHelper();
+	private BookDAOImpl bookImpl = new BookDAOImpl();
+	
 	public Book parse(String xmlText){
 		Book b = new Book();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -46,10 +51,22 @@ public class BookService {
 		}
 		b.setTitle(title);
 		b.setDescription(description);
-		b.setReviews(review);
+		b.setGoodReadReviews(review);
 		return b;
 		
 	}
+	
+	private void getReviews(Book b){
+		String title = b.getTitle();
+		bookImpl.getReviews(title);
+		List<Review> ls = new ArrayList<Review>();
+		Review r = new Review();
+		r.setContent("test review");
+		r.setTime(new Date(2017, 5, 3));
+		ls.add(r);
+		b.setReviews(ls);
+	}
+	
 	public BookReviewResponse getBookReviewByTitle(String searchTitle){
 		List<String> titleList = getBookTitlesFromSearchTitle(searchTitle);
 		BookReviewResponse brr = new BookReviewResponse();
@@ -57,17 +74,22 @@ public class BookService {
 		brr.setLs(bookList);
 		
 		for (String title : titleList){
+			System.out.println(title);
 			String uri = "https://www.goodreads.com/book/title.xml?&key=1ceGv5zbND7H0OmgSdmkA&title="+ title;
 			RestTemplate restTemplate = new RestTemplate();
 			String result = restTemplate.getForObject(uri, String.class);
-//			Document result = restTemplate.getForObject(uri, Document.class);
 			Book b = parse(result);
+			getReviews(b);
 			bookList.add(b);
 		}    
 		return brr; 
 	}
 	
-	public List<String> getBookTitlesFromSearchTitle(String searchTitle){
+	public void addReview(String title, String review){
+		bookImpl.insertReview(title, review);
+	}
+	
+	private List<String> getBookTitlesFromSearchTitle(String searchTitle){
 		List<String> result = lucene.getSuggestion(searchTitle);
 		return result;
 	}

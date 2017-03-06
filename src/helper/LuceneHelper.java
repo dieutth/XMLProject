@@ -38,7 +38,7 @@ public class LuceneHelper {
     	List<String> titles = new ArrayList<String>();
 		try {
 			String[] suggestions;
-			suggestions = spellChecker.suggestSimilar(searchTitle, 4);
+			suggestions = spellChecker.suggestSimilar(searchTitle, 5);
 			if (suggestions!=null && suggestions.length>0) {
 		         for (String word : suggestions)
 		             titles.add(word);
