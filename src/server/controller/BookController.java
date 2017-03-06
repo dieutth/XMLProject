@@ -26,7 +26,7 @@ public class BookController {
 		return new ResponseEntity<BookReviewResponse>(brr, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/book/{title}/comments", method=RequestMethod.POST)
+	@RequestMapping(value="/book/comments/{title}", method=RequestMethod.POST)
 	public ResponseEntity<String> addComment(@RequestBody String review, @PathVariable("title") String title){
 //		title = "Harry Potter 1";
 		bookservice.addReview(title, review);

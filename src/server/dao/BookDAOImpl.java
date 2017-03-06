@@ -24,11 +24,15 @@ public class BookDAOImpl implements BookDAO {
 	    JsonObject rev = JsonObject.create()
 	             .put("content", review)
 	             .put("time", new Date().getTime());
-	    JsonArray revList = bucket.get(title).content().getArray("reviews"); 
+	    if (bucket.get(title) == null){
+	    	bucket.upsert(JsonDocument.create(title, JsonObject.empty().put("reviews", JsonArray.empty())));
+	    }
+	    JsonDocument jd = bucket.get(title);
+	    JsonArray revList = jd.content().getArray("reviews"); 
 	    revList.add(rev);
 
 	    // Store the Document
-	    bucket.upsert(JsonDocument.create(title, JsonObject.empty().put("reviews", rev)));
+	    bucket.upsert(JsonDocument.create(title, JsonObject.empty().put("reviews", revList)));
 		return true;
 	}
 	
